@@ -77,6 +77,17 @@ module Enumerable
 
     mapped
   end
+
+  def my_inject(prev)
+    result = nil
+
+    self.each do |elem|
+      result = yield prev, elem
+      prev = result
+    end
+
+    result
+  end
 end
 
 # You will first have to define my_each
