@@ -55,6 +55,16 @@ module Enumerable
 
     true
   end
+
+  def my_count
+    count = 0
+
+    self.each do |elem|
+      count += 1 if not block_given? or yield elem
+    end
+
+    count
+  end
 end
 
 # You will first have to define my_each
