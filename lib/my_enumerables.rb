@@ -65,6 +65,18 @@ module Enumerable
 
     count
   end
+
+  def my_map
+    return to_enum(:my_map) unless block_given?
+
+    mapped = []
+
+    self.each do |elem|
+      mapped << yield(elem)
+    end
+
+    mapped
+  end
 end
 
 # You will first have to define my_each
