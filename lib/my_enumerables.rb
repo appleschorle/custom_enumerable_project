@@ -18,11 +18,22 @@ module Enumerable
     return to_enum(:my_select) unless block_given?
 
     filtered = []
+
     self.each do |elem|
       filtered << elem if yield(elem)
     end
 
     filtered
+  end
+
+  def my_all?
+    return to_enum(:my_all?) unless block_given?
+
+    self.each do |elem|
+      return false if not yield(elem)
+    end
+
+    true
   end
 end
 
