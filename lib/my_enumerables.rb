@@ -1,8 +1,10 @@
 module Enumerable
   # Your code goes here
   def my_each_with_index
-    index = 0
     return to_enum(:my_each_with_index) unless block_given?
+
+    index = 0
+
     self.each do |elem|
       yield elem, index
 
@@ -10,6 +12,17 @@ module Enumerable
     end
 
     self
+  end
+
+  def my_select
+    return to_enum(:my_select) unless block_given?
+
+    filtered = []
+    self.each do |elem|
+      filtered << elem if yield(elem)
+    end
+
+    filtered
   end
 end
 
