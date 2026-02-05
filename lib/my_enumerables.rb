@@ -5,7 +5,7 @@ module Enumerable
 
     index = 0
 
-    self.each do |elem|
+    self.my_each do |elem|
       yield elem, index
 
       index += 1
@@ -19,7 +19,7 @@ module Enumerable
 
     filtered = []
 
-    self.each do |elem|
+    self.my_each do |elem|
       filtered << elem if yield(elem)
     end
 
@@ -29,7 +29,7 @@ module Enumerable
   def my_all?
     return to_enum(:my_all?) unless block_given?
 
-    self.each do |elem|
+    self.my_each do |elem|
       return false if not yield(elem)
     end
 
@@ -39,7 +39,7 @@ module Enumerable
   def my_any?
     return to_enum(:my_any?) unless block_given?
 
-    self.each do |elem|
+    self.my_each do |elem|
       return true if yield(elem)
     end
 
@@ -49,7 +49,7 @@ module Enumerable
   def my_none?
     return to_enum(:my_none?) unless block_given?
 
-    self.each do |elem|
+    self.my_each do |elem|
       return false if yield(elem)
     end
 
@@ -59,7 +59,7 @@ module Enumerable
   def my_count
     count = 0
 
-    self.each do |elem|
+    self.my_each do |elem|
       count += 1 if not block_given? or yield elem
     end
 
@@ -71,7 +71,7 @@ module Enumerable
 
     mapped = []
 
-    self.each do |elem|
+    self.my_each do |elem|
       mapped << yield(elem)
     end
 
@@ -81,7 +81,7 @@ module Enumerable
   def my_inject(prev)
     result = nil
 
-    self.each do |elem|
+    self.my_each do |elem|
       result = yield prev, elem
       prev = result
     end
@@ -99,8 +99,8 @@ class Array
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    self.each do |elem|
-      yield(elem)
+    for i in 0...self.size
+      yield(self[i])
     end
 
     self
